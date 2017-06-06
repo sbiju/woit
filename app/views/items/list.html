@@ -1,0 +1,21 @@
+<div ng-controller="ItemListController" class="block-l">
+
+	<div class="input-group">
+		<label>Search:</label>
+	</div>
+
+	<!--md-button class="md-raised md-primary" ng-click="search()">Search</md-button-->
+	<md-list flex>
+        <md-subheader class="md-no-sticky">3 line item (with hover)</md-subheader>
+        <md-list-item class="md-3-line" ng-repeat="item in itemList.data" >
+          <img src="images/portrait.png" class="md-avatar" alt="{{item.fields.title}}" />
+          <div class="md-list-item-text" layout="column">
+            <h3>Code:{{item.fields.code}}</h3>
+            <h4>Title:{{item.fields.title}}</h4>
+            <p>{{item.fields.description }}</p>
+            <a ng-click="select(item)">See Detail</a>
+          </div>
+        </md-list-item>
+    </md-list>
+
+</div>

@@ -1,0 +1,84 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+		
+		<title>angularZ</title>
+		
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+		<!--link rel="stylesheet" href="scripts/zui/zui.css" /-->
+
+		<!--link rel="stylesheet" href="styles/global.css" /-->
+		<link rel="stylesheet" href="styles/ui.css" />
+		<link rel="stylesheet" href="styles/message.css" />
+	</head>
+	
+	<body ng-app="myApp">
+		<div ng-controller="HeaderController">
+			<header data="menus"></header>
+    	</div>
+ 
+	    <div style="position:fixed;top:53px;width:100%;">
+			<ng-view></ng-view><!-- main content area-->
+	    </div>
+
+
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+		<script src="bower_components/angular-route/angular-route.min.js"></script>
+		<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+		<script src="bower_components/angular-touch/angular-touch.min.js"></script>
+		<script src="bower_components/angular-translate/angular-translate.min.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+		<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+		<script src="bower_components/angular-messages/angular-messages.min.js"></script>
+		<script src="bower_components/angular-material/angular-material.min.js"></script>
+		<script src="bower_components/jsencrypt/bin/jsencrypt.min.js""></script>
+		<script src="bower_components/socket.io-client/socket.io.js""></script>
+		
+
+		<!--script src="dist/debug/angR-lib.js"></script-->
+
+		<script src="typescripts/models.js"></script>
+		<script src="scripts/services/main.js"></script>
+		<script src="scripts/services/auth.js"></script>
+		<script src="scripts/services/user.js"></script>
+		<script src="scripts/services/item.js"></script>
+
+		<script src="scripts/directives/header.js"></script>
+		<script src="scripts/directives/validator.js"></script>
+
+		<script src="scripts/controllers/header.js"></script>
+		<script src="scripts/controllers/home.js"></script>
+		<script src="scripts/controllers/auth/login.js"></script>
+		<script src="scripts/controllers/auth/signup.js"></script>
+		<script src="scripts/controllers/items/list.js"></script>
+		<script src="scripts/controllers/items/detail.js"></script>
+
+		
+		<script src="scripts/app.js"></script>
+		<script src="scripts/config.js"></script>
+		<script src="scripts/pubkey.js"></script>
+		
+
+		
+		<script src="scripts/profile.js"></script>
+
+
+		<!--script src="dist/release/angR-lib.min.js"></script>
+		<script src="dist/release/angR.min.js"></script-->
+
+		<script type="text/ng-template" id="input-error-temp">
+		  <div ng-message="required">This field is required</div>
+		  <div ng-message="minlength">Must be more than 4 characters</div>
+		  <div ng-message="maxlength">Must be less than 30 characters</div>
+		</script>
+	</body>
+</html>

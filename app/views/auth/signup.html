@@ -1,0 +1,66 @@
+<div ng-controller="SignUpController" class="block-s">
+	<form name="signupForm" onsubmit="return false;">
+
+
+		<!--div class="z-title-s" translate><h1>Sign Up</h1></div-->
+
+		<div class='input-group'>
+			<label>Username</label>
+			<inputbox on-change="onChangeUsername(val)" ctrl="username"></inputbox>
+
+			<div class="error">
+				<div ng-show="username.err=='Empty'">*Username cannot be empty.</div>
+				<div ng-show="username.err=='Exist'">*Username exists, please use another.</div>
+				<div ng-show="username.err=='InvalidChar'">Can not use following characters: / \ : * ? " &lt; &gt; |</div>
+	        </div>
+		</div>
+
+		<!--div layout-gt-sm="row" style="margin-bottom:20px;">
+			<div>I 'm a &nbsp;</div>
+		    <md-radio-group ng-model="gender" layout-gt-sm="row">
+		      <md-radio-button value="m" class="md-primary">Male</md-radio-button>
+		      <md-radio-button value="f">Female</md-radio-button>
+		    </md-radio-group>
+		</div-->
+		
+		<div class="input-group">
+			<label>Email</label>
+			<inputbox on-change="onChangeEmail(val)" ctrl="email"></inputbox>
+
+			<div class="error">
+				<div ng-show="email.err=='Empty'">*Username cannot be empty.</div>
+				<div ng-show="email.err=='Exist'">*Email exists, please use another.</div>
+				<div ng-show="email.err=='Invalid'">Invalid Email format.</div>
+	        </div>
+		</div>
+
+		<div class="input-group">
+			<label>Password</label>
+			<inputbox on-change="onChangePassword(val)" ctrl="password"></inputbox>
+			<div class="error">
+				<div ng-show="password.err=='Empty'">*Password cannot be empty.</div>
+				<div ng-show="password.err=='TooSimple'">At least 4 characters or numbers.</div>
+	        </div>
+		</div>
+			
+
+
+		<!--div layout-gt-sm="row">
+			<checkbox ctrl="agreeTerm">
+
+				<span translate>Agree</span> <span>Our</span> <a ng-click="openTermsPage()"><span translate>Terms of Use</span></a> <span translate>and</span> <a ng-click="openPrivacyPage()"><span translate>Privacy Policy</span></a>
+			<div ng-messages="signupForm.agreeTerm.$error">
+	          <div ng-message="required">This is required.</div>
+	        </div>
+			</checkbox>
+		</div-->
+
+		<div style="margin-bottom: 25x; font-size:12px;">
+		<span translate>By click following button, You agreed</span> <span>our</span> <a ng-click="openTermsPage()"><span translate>Terms of Use</span></a> <span translate>and</span> <a ng-click="openPrivacyPage()"><span translate>Privacy Policy</span></a>
+		</div>
+		<div class="btn btn-primary full-w" ng-click="signUp()">Join For Free</div>
+
+
+
+	</form>
+</div>

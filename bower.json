@@ -1,0 +1,34 @@
+{
+  "name": "angR",
+  "version": "0.0.1",
+  "homepage": "http://westudents.ca",
+  "authors": [
+    "zlkca <likzhang@gmail.com>"
+  ],
+  "description": "angularZ framework",
+  "keywords": [
+    "angularZ framework"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.5.5",
+    "angular-route": "1.5.x",
+    "angular-resource":"1.5.x",
+    "angular-cookies":"1.5.x",
+    "angular-mocks":"1.5.x",
+    "angular-sanitize":"1.5.x",
+    "angular-touch":"1.5.x",
+    "angular-animate":"1.5.x",
+    "angular-material":"1.1.1",
+    "angular-translate":"2.8.x",
+    "jquery":"~2.1.0",
+    "bootstrap":"3.3.5",
+    "font-awesome":"4.5.0",
+    "jsencrypt":"2.x",
+    "socket.io-client":"1.5.x"
+  },
+  "resolutions": {
+    "angular": "1.5.5"
+  }
+}

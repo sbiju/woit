@@ -1,0 +1,51 @@
+{
+  "name": "angR",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Angular framework",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "body-parser": "1.14.0",
+    "bower": "1.4.0",
+    "cookie-parser": "1.4.0",
+    "express": "4.2",
+    "express-session": "1.12.0",
+    "grunt": "^1.0.1",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-concat": "^0.1.6",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-less": "^1.4.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-injector": "^1.1.0",
+    "grunt-typescript": "^0.8.0",
+    "jasmine-core": "2.1.x",
+    "jquery": "2.1.0",
+    "jsonwebtoken": "5.0.0",
+    "karma": "~0.12.x",
+    "karma-jasmine": "~0.3.x",
+    "karma-phantomjs-launcher": "~0.2.1",
+    "karma-requirejs": "~0.2.x",
+    "method-override": "2.0",
+    "minimatch": "^3.0.3",
+    "mocha": "1.20.x",
+    "node-rsa": "0.x",
+    "socket.io": "^1.5.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "genprivkey": "cd openssl & openssl genrsa -out ../server/rsa_1024_priv.pem 1024",
+    "genpubkey": "cd openssl & openssl rsa -pubout -in ../server/rsa_1024_priv.pem -out rsa_1024_pub.pem",
+    "bower-install": "bower install",
+    "genkey": "npm run genprivkey && npm run genpubkey",
+    "postinstall": "npm run bower-install",
+    "prestart": "npm install",
+    "start": "node server/serv.js",
+    "debug": "node-debug server/serv.js",
+    "preupdate-webdriver": "npm install"
+  }
+}

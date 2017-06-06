@@ -1,0 +1,38 @@
+<div ng-controller="ItemDetailController" layout-gt-xs="row">
+	<div flex-gt-xs=60 layout-gt-xs="column">
+<!-- 		<div flex-gt-xs=100 style="padding-top: 15px;">
+		<img ng-src="{{image}}" style="height:640px;width:auto;" />
+		</div>
+		<div flex-gt-xs=100 style="padding-top: 15px;">
+		<img ng-repeat="img in images" ng-src="{{img}}" alt="{{partner.username}}" style="height:64px;width:auto;" class="col-xs-2" ng-click="selectImage(img)"/>
+		</div> -->
+	</div>
+	<div flex-gt-xs=40>
+		<div flex-gt-xs=100>
+			<h3 class="z-title-s">{{item.fields.owner_username}}</h3> 
+			<h5 class="z-text-s"></h5>
+			
+			<div>
+				<span class="title-s">Item Title:</span>
+				<span class="text-s">{{item.fields.title}}</span>
+			</div>
+			<div>
+				<span class="title-s">Code:</span>
+				<span class="text-s">{{item.fields.code}}</span>
+			</div>
+			<img src="images/portrait.png" class="md-avatar" alt="{{item.fields.title}}" />
+			<!-- <div><span class="title-s">Description:</span><span class="text-s">{{item.fields.description}}</span></div> -->
+
+			<div><span class="title-s">Description:</span><span class="text-s" style="width:200px;">{{item.fields.description}}</span></div>
+		</div>
+
+		<div>
+			<input ng-model="offer.price" />
+		</div>
+		<div flex-gt-xs=100 style="padding-right: 30px; margin-top: 20px;">
+			<div flex-gt-xs=100>
+				<div class='btn btn-primary' ng-click="offer()">Make an Offer</div>
+			</div>
+		</div>
+	</div>
+</div>
