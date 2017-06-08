@@ -21,8 +21,8 @@
 
 angular.module('main')
 
-.controller('SignUpController', [ '$scope', '$rootScope','$http', '$location', 'MainService', 'AuthService',
-                      				function( $scope, $rootScope, $http, $location, $ms, $auth) {
+.controller('SignUpController', [ '$scope', '$location', 'AuthService', 'MainService',
+                      				function( $scope, $location, $auth, $ms) {
 
 	var Error = {
 			NONE:0,
@@ -61,10 +61,10 @@ angular.module('main')
 
 		//$scope.signupForm = { username:{$error:{required:true, minLength:true, maxLength:true}}};
 
-		$scope.username = { err: "", val:"" };
-		$scope.email 	= { err: "", type: "email", val:"" };
-		$scope.password = { err: "", type: "password", val:"" };
-		$scope.agreeTerm = { checked: false };
+		$scope.username = '';//{ err: "", val:"" };
+		$scope.email 	= '';//{ err: "", type: "email", val:"" };
+		$scope.password = '';//{ err: "", type: "password", val:"" };
+		$scope.agreeTerm = '';//{ checked: false };
 	}
 	
 
@@ -72,72 +72,34 @@ angular.module('main')
 	//-------------------------------------
 	// Public methods
 	//-------------------------------------
-	$scope.openTermsPage = function(){
-		$location.path('legal-terms');
-	}
+	// $scope.openTermsPage = function(){
+	// 	$location.path('legal-terms');
+	// }
 	
-	$scope.openPrivacyPage = function(){
-		$location.path('privacy-policy');
-	}
+	// $scope.openPrivacyPage = function(){
+	// 	$location.path('privacy-policy');
+	// }
 	
-	$scope.showError = function(field){
-		return field.$invalid;
-	}
+	// $scope.showError = function(field){
+	// 	return field.$invalid;
+	// }
 
-	$scope.invalidChar = function(value){
-		var pattern = /[\/\\:\*\?\"<>\|]/g;
-	    return pattern.test(value);
-	}
+	// $scope.invalidChar = function(value){
+	// 	var pattern = /[\/\\:\*\?\"<>\|]/g;
+	//     return pattern.test(value);
+	// }
 
-	$scope.onChangeUsername = function(val){
-		$scope.username.err = '';
-	}
+	// $scope.onChangeUsername = function(val){
+	// 	$scope.username.err = '';
+	// }
 
-	$scope.signUp = function() {
-		/*
-		cleanErrorMessage();
-		
-		if(!$scope.agreeTerm){
-			$scope.error.agreement = "*In order to use our services, you must agree our Terms and privacy policy.";
-		}else{
-			$scope.error.agreement = "";
-		}
-		*/
-		// if(!$scope.username.val){
-		// 	$scope.username.err = 'Empty';
-		// }else if($auth.hasInvalidChar($scope.username.val)){
-		// 	$scope.username.err = 'InvalidChar';
-		// }else if($auth.accountExistSync({account: $scope.username.val})){
-		// 	$scope.username.err = 'Exist';
-		// }
-
-		// if(!$scope.email.val){
-		// 	$scope.email.err = 'Empty';
-		// }else if(!$auth.isEmail($scope.email.val)){
-		// 	$scope.email.err = 'Invalid';
-		// }else if($auth.emailExistSync({email: $scope.email.val})){
-		// 	$scope.email.err = 'Exist';
-		// }
-
-		// if(!$scope.password.val){
-		// 	$scope.password.err = 'Empty';
-		// }
-
-
-		// if($scope.username.err || $scope.email.err|| $scope.password.err){
-		// 	// setTimeout(function(){
-		// 	// 	$scope.$apply();
-		// 	// },0);
-		// 	return;
-		// }
-
-		
-		var user = new User('', $scope.username.val, $scope.email.val, $scope.password.val);
+	$scope.submit = function() {
+		var user = new User('', $scope.username, $scope.email, $scope.password);
 
 		$auth.signup(user).then(function(d){
 			if(d.data.token){
 				alert('signup success!');
-				$rootScope.$broadcast("OnUpdateHeader",{'loggedIn':true});
+				//$rootScope.$broadcast("OnUpdateHeader",{'loggedIn':true});
 				$ms.setSessionItem('token', d.data.token);
 				$location.path('items');
 			}
@@ -147,56 +109,27 @@ angular.module('main')
 	//----------------------------------
 	// Private methods
 	//----------------------------------
-  	function loginSuccessHdlr(data){
-		$ms.setSessionItem('token', data.token);
-		$ms.setSessionItem('user', data.decoded);
-		$rootScope.$broadcast("OnUpdateHeader");
+ //  	function loginSuccessHdlr(data){
+	// 	$ms.setSessionItem('token', data.token);
+	// 	$ms.setSessionItem('user', data.decoded);
+	// 	$rootScope.$broadcast("OnUpdateHeader");
 		
-		if(data.decoded.username == 'admin'){
-			$location.path('/admin');
-		}else{
-			$location.path('/');
-		}
-  	}
+	// 	if(data.decoded.username == 'admin'){
+	// 		$location.path('/admin');
+	// 	}else{
+	// 		$location.path('/');
+	// 	}
+ //  	}
   	
-	function cleanErrorMessage(){
-		for( var key in $scope.error){
-			$scope.error[key] = "";
-		}
-	}
+	// function cleanErrorMessage(){
+	// 	for( var key in $scope.error){
+	// 		$scope.error[key] = "";
+	// 	}
+	// }
 			
-	function setErrorMessage(errors){
-		// if(errors.indexOf(Error.USERNAME_EXISTS) != -1){
-		// 	$scope.signupForm.username.$error.exist = true;
-		// }else{
-		// 	$scope.signupForm.username.$error.exist = false;
-		// }
+	// function setErrorMessage(errors){
 
-		// if(errors.indexOf(Error.PASSWORD_TOO_SIMPLE) != -1){
-		// 	$scope.signupForm.$error.simplePassword = true;//"*At least 6 characters, include uppercase, lowercase and numbers";
-		// }else{
-		// 	$scope.signupForm.$error.simplePassword = false;
-		// }
-
-		// if(errors.indexOf(Error.INVALID_EMAIL) != -1){
-		// 	$scope.signupForm.email.$error.invalid = true;
-		// 	$scope.signupForm.email.$valid = false;
-		// 	$scope.signupForm.email.$invalid = true;
-		// }else{
-		// 	$scope.signupForm.email.$error.invalid = false;
-		// 	$scope.signupForm.email.$invalid = false;
-		// 	$scope.signupForm.email.$valid = true;
-		// 	if(errors.indexOf(Error.EMAIL_EXISTS) != -1){
-		// 		$scope.signupForm.email.$error.exist = true;
-		// 		$scope.signupForm.email.$valid = false;
-		// 		$scope.signupForm.email.$invalid = true;
-		// 	}else{
-		// 		$scope.signupForm.email.$error.exist = false;
-		// 		$scope.signupForm.email.$invalid = false;
-		// 		$scope.signupForm.email.$valid = true;
-		// 	}
-		// }
-	}
+	// }
 	
 	//----------------------------------
 	// Events

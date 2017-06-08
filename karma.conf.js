@@ -19,14 +19,20 @@ module.exports = function(config) {
             {pattern:'app/bower_components/angular-route/angular-route.js'},
             {pattern:'app/bower_components/jquery/dist/jquery.min.js'},
             {pattern:'app/bower_components/bootstrap/dist/js/bootstrap.min.js'},
+            {pattern:'app/bower_components/jsencrypt/bin/jsencrypt.min.js'},
             //{pattern:'node_modules/requirejs/require.js'},
             'app/scripts/config.js',
+            'app/scripts/services/main.js',
             'app/scripts/services/*.js',
             'app/scripts/directives/*.js',
             'app/scripts/controllers/*.js',
-            'app/scripts/ui.js',
+            'app/scripts/controllers/*/*.js',
             'app/scripts/app.js',
-            'test/app/services/main.js'
+            'test/app/services/main.js',
+            'test/app/services/auth.js',
+            'test/app/services/item.js',
+            'test/app/services/user.js',
+            'test/app/controllers/auth/login.js'
     ],
 
 
@@ -68,7 +74,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
     
     

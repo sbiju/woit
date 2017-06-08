@@ -5,7 +5,7 @@
 
 angular.module('main')
 
-.factory('ItemService', ['$rootScope', '$http', function($rootScope, $http){
+.factory('ItemService', ['$http', 'MainService', function($http, $ms){
 	
 	var _self = {
 
@@ -15,9 +15,9 @@ angular.module('main')
 		//	Return:
 		//		promise object
 		getItems: function( query ){			
-			var s = query ? $.param(query) : null;
+			var s = query ? $ms.toQueryStr(query) : null;
 			if(s){
-				return $http.get( cfg.API_URL + 'items?' + s );
+				return $http.get( cfg.API_URL + 'items' + s );
 			}else{
 				return $http.get( cfg.API_URL + 'items');
 			}
@@ -29,7 +29,7 @@ angular.module('main')
 		//	Return:
 		//		promise object
 		saveItem: function( item ){
-			return $http.post( cfg.API_URL + 'items'); // {'token':token, 'query':query}
+			return $http.post( cfg.API_URL + 'items', item); // {'token':token, 'query':query}
 		},
 
 

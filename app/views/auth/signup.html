@@ -6,12 +6,12 @@
 
 		<div class='input-group'>
 			<label>Username</label>
-			<inputbox on-change="onChangeUsername(val)" ctrl="username"></inputbox>
+			<input ng-model="username" />
 
 			<div class="error">
-				<div ng-show="username.err=='Empty'">*Username cannot be empty.</div>
+<!-- 				<div ng-show="username.err=='Empty'">*Username cannot be empty.</div>
 				<div ng-show="username.err=='Exist'">*Username exists, please use another.</div>
-				<div ng-show="username.err=='InvalidChar'">Can not use following characters: / \ : * ? " &lt; &gt; |</div>
+				<div ng-show="username.err=='InvalidChar'">Can not use following characters: / \ : * ? " &lt; &gt; |</div> -->
 	        </div>
 		</div>
 
@@ -25,21 +25,21 @@
 		
 		<div class="input-group">
 			<label>Email</label>
-			<inputbox on-change="onChangeEmail(val)" ctrl="email"></inputbox>
+			<input ng-model="email" />
 
 			<div class="error">
-				<div ng-show="email.err=='Empty'">*Username cannot be empty.</div>
+<!-- 				<div ng-show="email.err=='Empty'">*Username cannot be empty.</div>
 				<div ng-show="email.err=='Exist'">*Email exists, please use another.</div>
-				<div ng-show="email.err=='Invalid'">Invalid Email format.</div>
+				<div ng-show="email.err=='Invalid'">Invalid Email format.</div> -->
 	        </div>
 		</div>
 
 		<div class="input-group">
 			<label>Password</label>
-			<inputbox on-change="onChangePassword(val)" ctrl="password"></inputbox>
+			<input type="password" ng-model="password" />
 			<div class="error">
-				<div ng-show="password.err=='Empty'">*Password cannot be empty.</div>
-				<div ng-show="password.err=='TooSimple'">At least 4 characters or numbers.</div>
+<!-- 				<div ng-show="password.err=='Empty'">*Password cannot be empty.</div>
+				<div ng-show="password.err=='TooSimple'">At least 4 characters or numbers.</div> -->
 	        </div>
 		</div>
 			
@@ -58,7 +58,7 @@
 		<div style="margin-bottom: 25x; font-size:12px;">
 		<span translate>By click following button, You agreed</span> <span>our</span> <a ng-click="openTermsPage()"><span translate>Terms of Use</span></a> <span translate>and</span> <a ng-click="openPrivacyPage()"><span translate>Privacy Policy</span></a>
 		</div>
-		<div class="btn btn-primary full-w" ng-click="signUp()">Join For Free</div>
+		<div class="btn btn-primary full-w" ng-click="submit()">Join For Free</div>
 
 
 

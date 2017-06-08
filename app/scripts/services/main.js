@@ -22,17 +22,29 @@ angular.module('main',[])
 	
 
 	var _self = {
-		setUsers : function(users){
-			_users = users;
-		},
-
-		getUser : function(id){
-			for(var i=0; i<_users.length;i++){
-				if(_users[i]._id == id){
-					return _users[i];
+		//------------------------------------------------------------------------------------------
+		// 	Convert the query object to string. jqLite does not have param() function, we need it
+		//	Arguments: 
+		//		query 	--- Query object. eg. { item_id: itemId }
+		//	Return:
+		//		string of the query if success, eg. ?reviewer=a&reviewee=b; otherwise return ''
+		toQueryStr: function(query){
+			var list = [];
+			if( query ){
+				var keys = Object.keys(query);
+				if(keys.length == 0){
+					return "";
+				}else{
+					for(var key in query){
+						if(query.hasOwnProperty(key)){
+							list.push(key + '=' + query[key]);
+						}
+					}
+					return '?' + list.join('&');
 				}
+			}else{
+				return '';
 			}
-			return null;
 		},
 
 		//--------------------------------------------------------------------------------------
@@ -109,24 +121,7 @@ angular.module('main',[])
 			}
 		},
 
-		//-------------------------------------------------------------------------------------------
-		// getAccount
-		// Arguments: None
-		getAccount: function(token, cb){
-			$http.post(cfg.apiUrl + '/getAccount', {'token': token}).success(function (data) {
-			    	if(data.success){
-	                    if(cb)
-	                    	cb(data.account);
-			    	}else{
-						if(cb)
-							cb(data.account);
-			    	}
-				}).error(function(data, status, header, config){
-					if(cb)
-						cb(data.account);
-				});
-		},
-
+		
 
 		//-------------------------------------------------------------------------------------------
 		// checkToken  	check if token is valid
@@ -198,25 +193,6 @@ angular.module('main',[])
 		},
 		
 		
-		//------------------------------------------------------------------------------------------
-		// 	Convert the query object to string.
-		//	Arguments: 
-		//		query --- query object of mongodb format. eg. { item_id: itemId }
-		//	Return:
-		//		string of the query, eg. firstname=a&lastname=b
-		//------------------------------------------------------------------------------------------
-		toQueryStr: function(query){
-			var list = [];
-			if( !_.isEmpty(query) ){
-				_.each(query, function(val, key){
-					list.push(key + '=' + val);
-				});
-				return list.join('&');
-			}
-			return '';
-		},
-
-		
 		securePost: function(url, options, successCb, errorCb){
 			var token = this.getSessionItem('token');
 			if(token){
@@ -254,88 +230,6 @@ angular.module('main',[])
 			}
 		},
 
-		
-
-		// dir --- username
-		getPhotos: function(dir, cb){
-			$http.post(cfg.apiUrl + '/getUploads', {'dir': dir, 'type':'pic'})
-				.success(function (data) {
-
-					if(cb)
-						cb(data.docs);
-					
-				}).error(function(){
-					console.log('getPhotos --- Exception.');
-				});
-		},
-
-		// query --- {'dir': dir, 'type':'pic'}
-		rmPhoto: function(query, cb){
-			$http.post(cfg.apiUrl + '/rmPhoto', query)
-				.success(function (data) {
-
-					if(cb)
-						cb(data.doc);
-					
-				}).error(function(){
-					console.log('mrPhoto --- Exception.');
-				});
-		},
-
-		getProfiles: function(username, cb){
-			$http.post(cfg.apiUrl + '/getProfiles', {'username': username})
-				.success(function (data) {
-
-					if(cb){
-						cb(data.profiles);// if not found return []
-					}
-					
-				}).error(function(){
-					console.log('getPhotos --- Exception.');
-				});
-		},
-
-		saveProfile:function(profile, cb){
-			$http.post(cfg.apiUrl + '/saveProfile', profile).success(
-				function(data, status, headers, config) {
-					if (data.error && data.error.length > 0) {
-						console.log('fail: save profile.')
-					}else{
-						if(cb)
-							cb(data.profile);
-					}
-				}).error(
-					function(data, status, headers, config) {
-						//By pass
-				});
-		},
-
-		// updates: eg. {status: 0, created:ISODate() }
-		updateProfile:function(query, updates, cb){
-			$http.post(cfg.apiUrl + '/updateProfile', {'query':query, 'updates': { $set: updates }}).success(
-				function(data, status, headers, config) {
-					if (data.success) {
-						if(cb)
-							cb(data.results);
-					}else{
-						console.log('fail: update profile.');
-					}
-				}).error(
-					function(data, status, headers, config) {
-						//By pass
-				});
-		},
-
-		getAge: function(birthday){
-			if(birthday){
-				var y = birthday.split('-')[0];
-				var cy = new Date().getFullYear();
-				return parseInt(cy) - parseInt(y);
-			}else{
-				return -1;
-			}
-		},
-
 		postMessage: function(msg, successCb, failCb){
 		    $http.post(cfg.apiUrl + '/saveMessage', msg).success(function () {
                 
@@ -358,38 +252,6 @@ angular.module('main',[])
 		    	if(data.success){
                     if(successCb)
                     	successCb(data.messages);
-		    	}else{
-					if(failCb)
-						failCb();
-		    	}
-			}).error(function(){
-				if(failCb)
-					failCb();
-			});
-		},
-
-		postMeet: function(msg, successCb, failCb){
-		    $http.post(cfg.apiUrl + '/saveMeet', msg).success(function () {
-                if(successCb)
-                	successCb();
-			}).error(function(){
-				if(failCb)
-					failCb();
-			});
-		},
-
-		//--------------------------------------------------------------------------------------
-		// getMesets 
-		// Arguments:
-		// 		query --- query object
-		// Return:
-		//		{ success: true, meets: docs}
-		getMeets( query, successCb, failCb){
-			var token = _self.getSessionItem('token');
-		    $http.post(cfg.apiUrl + '/getMeets', {'token': token, 'query': query}).success(function (data) {
-		    	if(data.success){
-                    if(successCb)
-                    	successCb(data.meets);
 		    	}else{
 					if(failCb)
 						failCb();

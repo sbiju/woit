@@ -1,13 +1,13 @@
 {
-  "name": "angR",
+  "name": "woit",
   "version": "0.0.1",
-  "homepage": "http://westudents.ca",
+  "homepage": "http://www.yocompute.ca",
   "authors": [
-    "zlkca <likzhang@gmail.com>"
+    "zlkca <supports@yocompute.com>"
   ],
-  "description": "angularZ framework",
+  "description": "angularjs framework",
   "keywords": [
-    "angularZ framework"
+    "angularjs framework"
   ],
   "license": "MIT",
   "private": true,

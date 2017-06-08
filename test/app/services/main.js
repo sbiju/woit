@@ -17,6 +17,45 @@ describe("main service", function() {
 		});
 	});
 	
+	describe('test convert query string', function(){
+		var $ms;
+
+		beforeEach(function(){
+			angular.mock.inject(function(_MainService_) {
+				$ms= _MainService_;
+			});
+		});
+		describe("null query", function() {
+		    it("Should return empty string", function() {
+		    	var ret = $ms.toQueryStr();
+		    	expect(ret).toEqual('');
+		    });
+		});
+		describe("empty string query", function() {
+		    it("Should return empty string", function() {
+		    	var ret = $ms.toQueryStr('');
+		    	expect(ret).toEqual('');
+		    });
+		});
+		describe("empty query", function() {
+		    it("Should return empty string", function() {
+		    	var ret = $ms.toQueryStr({});
+		    	expect(ret).toEqual('');
+		    });
+		});
+		describe("single query", function() {
+		    it("Should return empty string", function() {
+		    	var ret = $ms.toQueryStr({a:'b'});
+		    	expect(ret).toEqual('?a=b');
+		    });
+		});
+		describe("multiple query", function() {
+		    it("Should return empty string", function() {
+		    	var ret = $ms.toQueryStr({a:'a', b:'b', c:'c'});
+		    	expect(ret).toEqual('?a=a&b=b&c=c');
+		    });
+		});
+	});
 	
 	describe('test get session item', function(){
 		it("should get null", function() {
